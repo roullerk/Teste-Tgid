@@ -35,12 +35,12 @@ public class Transacao {
     public Transacao() {
     }
 
-    public Transacao(LocalDateTime dataHora, BigDecimal valor, Cliente cliente, Empresa empresa, TipoTransacao tipo) {
+    public Transacao(LocalDateTime dataHora, TipoTransacao tipo, BigDecimal valor, Cliente cliente, Empresa empresa) {
         this.dataHora = dataHora;
+        this.tipo = tipo;
         this.valor = valor;
         this.cliente = cliente;
         this.empresa = empresa;
-        this.tipo = tipo;
     }
 
     public Long getId() {
