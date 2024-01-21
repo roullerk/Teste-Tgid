@@ -29,6 +29,10 @@ public class Empresa {
     public Empresa() {
     }
 
+    public Empresa(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
     public Empresa(String cnpj, String nome, String endereco, String email, String telefone, BigDecimal saldo) {
         this.cnpj = cnpj;
         this.nome = nome;
