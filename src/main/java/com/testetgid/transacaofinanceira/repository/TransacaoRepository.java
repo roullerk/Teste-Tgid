@@ -6,4 +6,5 @@ import com.testetgid.transacaofinanceira.model.Transacao;
 
 public interface TransacaoRepository extends JpaRepository<Transacao, Long> {
 
+    Transacao findById(long id);
 }
