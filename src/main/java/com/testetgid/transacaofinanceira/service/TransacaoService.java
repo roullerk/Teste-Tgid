@@ -1,5 +1,8 @@
 package com.testetgid.transacaofinanceira.service;
 
+import java.util.List;
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +43,15 @@ public class TransacaoService {
                 notificacaoService.notificarCallback(transacao, empresa, "Transação Realizada!");
             }
         }
+    }
+
+    public Transacao obterTransacaoPorId(Long id) {
+        Objects.requireNonNull(id, "Id não pode ser nulo");
+        // Optional<Transacao> transacao = transacaoRepository.findById(id);
+        return transacaoRepository.findById(id).orElse(null);
+    }
+
+    public List<Transacao> listarTransacoes() {
+        return transacaoRepository.findAll();
     }
 }
