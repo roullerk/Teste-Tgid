@@ -1,5 +1,6 @@
 package com.testetgid.transacaofinanceira.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -16,6 +17,7 @@ public class Cliente {
     private String endereco;
     private String email;
     private String telefone;
+    private BigDecimal saldo;
 
     @OneToMany(mappedBy = "cliente")
     private List<Transacao> transacoes;
@@ -23,12 +25,15 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String cpf, String nome, String endereco, String email, String telefone) {
+    public Cliente(String cpf, String nome, String endereco, String email, String telefone, BigDecimal saldo,
+            List<Transacao> transacoes) {
         this.cpf = cpf;
         this.nome = nome;
         this.endereco = endereco;
         this.email = email;
         this.telefone = telefone;
+        this.saldo = saldo;
+        this.transacoes = transacoes;
     }
 
     public String getCpf() {
@@ -65,6 +70,14 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
     }
 
     public List<Transacao> getTransacoes() {

@@ -12,6 +12,11 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Transacao {
 
+    public enum TipoTransacao {
+        DEPOSITO,
+        SAQUE
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,14 +30,17 @@ public class Transacao {
     @ManyToOne
     private Empresa empresa;
 
+    private TipoTransacao tipo;
+
     public Transacao() {
     }
 
-    public Transacao(LocalDateTime dataHora, BigDecimal valor, Cliente cliente, Empresa empresa) {
+    public Transacao(LocalDateTime dataHora, BigDecimal valor, Cliente cliente, Empresa empresa, TipoTransacao tipo) {
         this.dataHora = dataHora;
         this.valor = valor;
         this.cliente = cliente;
         this.empresa = empresa;
+        this.tipo = tipo;
     }
 
     public Long getId() {
@@ -69,6 +77,14 @@ public class Transacao {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public TipoTransacao getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoTransacao tipo) {
+        this.tipo = tipo;
     }
 
 }
