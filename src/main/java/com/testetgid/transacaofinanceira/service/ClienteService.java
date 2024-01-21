@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.testetgid.transacaofinanceira.model.Cliente;
@@ -28,10 +26,10 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
 
     @Autowired
-    private JavaMailSender javaMailSender;
+    private TaxaSistemaService taxaSistemaService;
 
     @Autowired
-    private TaxaSistemaService taxaSistemaService;
+    private NotificacaoService notificacaoService;
 
     private Validator validator;
 
@@ -93,7 +91,7 @@ public class ClienteService {
         transacaoService.realizarTransacao(transacao);
 
         // Envia notificação para o cliente
-        notificarCliente(transacao, cliente);
+        notificacaoService.notificarCliente(transacao, cliente);
     }
 
     private void validarCpf(String cpf) {
@@ -128,18 +126,5 @@ public class ClienteService {
         }
 
         return valorBruto;
-    }
-
-    private void notificarCliente(Transacao transacao, Cliente cliente) {
-        String destinatario = cliente.getEmail();
-
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(destinatario);
-        message.setText("Transação realizada! Detalhes : " + transacao.toString());
-
-        // Envia o e-mail
-        javaMailSender.send(message);
-
-        System.out.println("Notificação enviada por e-mail para " + destinatario);
     }
 }

@@ -27,6 +27,9 @@ public class EmpresaService {
     @Autowired
     private TaxaSistemaService taxaSistemaService;
 
+    @Autowired
+    private NotificacaoService notificacaoService;
+
     private Validator validator;
 
     // Garante que a instância seja criada apenas uma vez
@@ -81,6 +84,8 @@ public class EmpresaService {
                 empresaRepository.save(empresa);
             }
         }
+        // Manda um callback para a empresa
+        notificacaoService.notificarCallback(transacao, empresa, "Transação realizada!");
     }
 
     public void validarCnpj(String cnpj) {
