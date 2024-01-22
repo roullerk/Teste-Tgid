@@ -37,7 +37,7 @@ public class NotificacaoService {
 
     public void notificarCallback(Transacao transacao, Empresa empresa, String mensagem) {
 
-        String webhookEndPoint = "https://webhook.site/157aa9fa-d74f-409c-a209-689173e0784e";
+        String url = "https://webhook.site/157aa9fa-d74f-409c-a209-689173e0784e";
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -45,7 +45,7 @@ public class NotificacaoService {
 
         // Faz a requisição HTTP Poat para endpoint
         try {
-            restTemplate.postForObject(webhookEndPoint, requestBody, String.class);
+            restTemplate.postForObject(url, requestBody, String.class);
         } catch (RestClientException e) {
             e.printStackTrace();
         }
